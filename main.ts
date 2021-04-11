@@ -12,7 +12,7 @@ let green = 0
 let red = 0
 input.setAccelerometerRange(AcceleratorRange.OneG)
 basic.forever(function () {
-    if (Math.abs(input.acceleration(Dimension.Strength) - 1000) > 100) {
+    if (Math.abs(input.acceleration(Dimension.Strength) - 1023) > 30) {
         red = 255
         green = 0
         blue = 0
