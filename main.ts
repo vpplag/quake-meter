@@ -12,7 +12,7 @@ let blue = 0
 let green = 0
 let red = 0
 input.setAccelerometerRange(AcceleratorRange.OneG)
-let threshold = 30
+let threshold = 25
 basic.forever(function () {
     acc_strength = Math.abs(input.acceleration(Dimension.Strength) - 1023)
     led.plotBarGraph(
