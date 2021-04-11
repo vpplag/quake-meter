@@ -7,13 +7,19 @@ function SetColor (red: number, green: number, blue: number) {
     pins.analogWritePin(AnalogPin.P2, blue)
     basic.pause(200)
 }
+let acc_strength = 0
 let blue = 0
 let green = 0
 let red = 0
 input.setAccelerometerRange(AcceleratorRange.OneG)
 let threshold = 30
 basic.forever(function () {
-    if (Math.abs(input.acceleration(Dimension.Strength) - 1023) > threshold) {
+    acc_strength = Math.abs(input.acceleration(Dimension.Strength) - 1023)
+    led.plotBarGraph(
+    acc_strength,
+    threshold
+    )
+    if (acc_strength > threshold) {
         red = 255
         green = 0
         blue = 0
@@ -25,8 +31,4 @@ basic.forever(function () {
         blue = 0
         SetColor(red, green, blue)
     }
-    led.plotBarGraph(
-    Math.abs(input.acceleration(Dimension.Strength) - 1023),
-    threshold
-    )
 })
