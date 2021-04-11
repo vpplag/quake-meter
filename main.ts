@@ -11,11 +11,13 @@ let blue = 0
 let green = 0
 let red = 0
 input.setAccelerometerRange(AcceleratorRange.OneG)
+let threshold = 30
 basic.forever(function () {
-    if (Math.abs(input.acceleration(Dimension.Strength) - 1023) > 30) {
+    if (Math.abs(input.acceleration(Dimension.Strength) - 1023) > threshold) {
         red = 255
         green = 0
         blue = 0
+        music.playTone(262, music.beat(BeatFraction.Eighth))
         SetColor(red, green, blue)
     } else {
         red = 0
@@ -23,4 +25,8 @@ basic.forever(function () {
         blue = 0
         SetColor(red, green, blue)
     }
+    led.plotBarGraph(
+    Math.abs(input.acceleration(Dimension.Strength) - 1023),
+    threshold
+    )
 })
